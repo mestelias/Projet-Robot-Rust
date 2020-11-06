@@ -9,7 +9,7 @@ pub enum Orientation {
     Nothing,
 }
 
-pub enum Instruction {
+/*pub enum Instruction {
     let player1 : Orientation;
 
     match player1 {
@@ -18,7 +18,7 @@ pub enum Instruction {
         Orientation : F => println!("Avancer dans le sens de l'orientation !"),
         Orientation : Nothing => println!("Ne rien faire !"),
     }
-}
+}*/
 
 // fonction qui lit un caractères char et crée une Orientation
 pub fn function_orientation(orientation : char) -> Orientation {
@@ -41,8 +41,8 @@ pub struct Robot {
 }
 
 // creation d'autres robots
-fn Autres_Robots {
-    pub id : i32,
+fn Autres_Robots() {
+    pub id :: i32,
     pub position_en_x : usize,
     pub position_en_y : usize,
     pub orientation : char,
