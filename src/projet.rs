@@ -60,7 +60,3 @@ pub fn Collisions(grid : &mut Vec<Vec<char>>, robot_vecteur : &Vec<Robot>) {
         }
     }
 }
-
-fn main() {
- 
-}
