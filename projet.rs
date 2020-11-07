@@ -9,20 +9,9 @@ pub enum Orientation {
     Nothing,
 }
 
-/*pub enum Instruction {
-    let player1 : Orientation;
-
-    match player1 {
-        Orientation : R => println!("Rotation vers la droit !"),
-        Orientation : L => println!("Rotation vers la gauche !"),
-        Orientation : F => println!("Avancer dans le sens de l'orientation !"),
-        Orientation : Nothing => println!("Ne rien faire !"),
-    }
-}*/
-
-// fonction qui lit un caractères char et crée une Orientation
-pub fn function_orientation(orientation : char) -> Orientation {
-    match orientation {
+// fonction qui lit un caractères char et renvoie une instruction
+pub fn function_instruction(instruction : char) -> Orientation {
+    match instruction {
         'R' => Orientation :: Right,
         'L' => Orientation :: Left,
         'F' => Orientation ::Move,
