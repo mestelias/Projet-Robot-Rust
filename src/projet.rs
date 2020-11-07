@@ -30,7 +30,7 @@ pub struct Robot {
 }
 
 // creation d'autres robots
-fn Autres_Robots() {
+fn autres_Robots() {
     pub id :: i32,
     pub position_en_x : usize,
     pub position_en_y : usize,
@@ -46,7 +46,7 @@ fn Autres_Robots() {
 
 // fonction qui gère les cas de collisions avec un autre robot,
 // en indiquant les coordonnées x et y de la collision
-pub fn Collisions(grid : &mut Vec<Vec<char>>, robot_vecteur : &Vec<Robot>) {
+pub fn collisions(grid : &mut Vec<Vec<char>>, robot_vecteur : &Vec<Robot>) {
     for i in 0.. robot_vecteur.len() {
         for j in 0.. robot_vecteur.len() {
             if (robot_vecteur[i].id != robot_vecteur[j].id) 
