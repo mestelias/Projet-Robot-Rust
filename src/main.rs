@@ -1,5 +1,12 @@
 use std::str::FromStr;
 
+// TODO: Remove this and read in the file without
+// compile time constants.
+/// Maximum size in Y
+const X_MAX:isize = 5;
+/// Maximum size in X
+const Y_MAX:isize = 5;
+
 #[derive(Debug, PartialEq)]
 // enumeration Orientation avec les 4 cas possibles
 pub enum Orientation {
@@ -65,12 +72,7 @@ pub fn collisions(
                 //Puis on vérifie les coordonnées en x et en y
                 && (robot_vecteur[i].position_en_x == robot_vecteur[j].position_en_x)
                 && (robot_vecteur[i].position_en_y == robot_vecteur[j].position_en_y)
-                //Puis vérifie si le premier robot tape les extrémites
-                && (robot_vecteur[i].position_en_x == grid[MIN][MAX])
-                && (robot_vecteur[i].position_en_y == grid[MIN][MAX])^
-                //Puis vérifie si le deuxième robot tape les extrémites
-                && (robot_vecteur[j].position_en_x == grid[MIN][MAX])
-                && (robot_vecteur[j].position_en_y == grid[MIN][MAX])
+                // Check si on touche les bords 0 0 / X_MAX Y_MAX
             {
                 println!(
                     "Robot ID<{}> Collision en ({}, {})",
