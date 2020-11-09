@@ -7,9 +7,9 @@ use std::str::FromStr;
 // TODO: Remove this and read in the file without
 // compile time constants.
 /// Maximum size in Y
-const X_MAX:isize = 5;
+const X_MAX: isize = 5;
 /// Maximum size in X
-const Y_MAX:isize = 5;
+const Y_MAX: isize = 5;
 
 #[derive(Debug, PartialEq)]
 // enumeration Orientation avec les 4 cas possibles
