@@ -121,10 +121,16 @@ mod tests {
     #[test]
     //test d'instructions
     fn test_function_instruction() {
-        assert_eq!(function_instruction('R'), Orientation::Right);
-        assert_eq!(function_instruction('L'), Orientation::Left);
-        assert_eq!(function_instruction('F'), Orientation::Move);
-        assert_eq!(function_instruction('_'), Orientation::Nothing);
+        assert_eq!(parse_instruction('R'), Instruction::Right);
+        assert_eq!(parse_instruction('F'), Instruction::Forward);
+        assert_eq!(parse_instruction('L'), Instruction::Left);
+    }
+
+    #[test]
+    //test d'instructions
+    fn test_orientation_parsing() {
+        assert_eq!(parse_orientation('L'), Orientation::Left);
+        assert_eq!(parse_orientation('N'), Orientation::North);
     }
 
     #[test]
@@ -133,29 +139,44 @@ mod tests {
         let mut plateau_size: Vec<usize> = vec![5, 5];
         let mut state = vec![vec!['.'; plateau_size[0]]; plateau_size[1]];
         let mut robot_vecteur: Vec<Robot> = Vec::new();
-        let robot1 = Robot {
-            id: 1,
-            position_en_x: 1,
-            position_en_y: 0,
-            instruction: "S".to_string(),
-            command: vec!['F', 'L', 'L', 'F', 'R', 'F'],
-        };
+        use Instruction as I;
+        let robot1 = Robot::new(
+            1,
+            1,
+            0,
+            Orientation::South,
+            vec![
+                I::Forward,
+                I::Left,
+                I::Left,
+                I::Forward,
+                I::Right,
+                I::Forward,
+            ],
+        );
         robot_vecteur.push(robot1);
-        collisions(&mut state, &robot_vecteur, &plateau_size);
-        assert_eq!(state[0][1]);
+        let collision = collisions(&mut state, &robot_vecteur, &plateau_size);
+        assert_eq!(collision);
     }
 
     #[test]
     // creation des robots
     fn test_autres_Robots() {
-        let a = autres_Robots(1, 'r'.to_string(), 'r', 1, 1, vec!['R', 'L', 'F']);
-        let robot_test: Robot = Robot {
-            id: 1,
-            position_en_x: 1,
-            position_en_y: 1,
-            orientation: 'r'.to_string(),
-            command: vec!['R', 'L', 'F'],
-        };
+        use Instruction as I;
+        let a = Robot::new(
+            1,
+            1,
+            1,
+            Orientation::South,
+            vec![I::Right, I::Left, I::Forward],
+        );
+        let robot_test = Robot::new(
+            1,
+            1,
+            1,
+            Orientation::North,
+            vec![I::Right, I::Left, I::Forward],
+        );
         assert_eq!(a, robot_test);
     }
 }
