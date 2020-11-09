@@ -1,3 +1,7 @@
+// Compile me with `cargo build`
+// Execute me with `cargo run`
+// ;)
+
 use std::str::FromStr;
 
 // TODO: Remove this and read in the file without
