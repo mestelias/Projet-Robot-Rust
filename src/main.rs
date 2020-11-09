@@ -18,20 +18,27 @@ pub enum Orientation {
     Left,
     North,
     South,
-    Move,
-    Nothing,
+}
+#[derive(Debug, PartialEq)]
+pub enum Instruction {
+    Forward,
+    Right,
+    Left,
 }
 
 // fonction qui lit un caractères char et renvoie une instruction
-pub fn function_instruction(instruction: char) -> Orientation {
+pub fn parse_orientation(instruction: char) -> Orientation {
     match instruction {
         'R' => Orientation::Right,
         'L' => Orientation::Left,
         'N' => Orientation::North,
         'S' => Orientation::South,
-        'F' => Orientation::Move,
-        _ => Orientation::Nothing,
+        unknow_char => panic!("Can't handle <{}>", unknow_char),
     }
+}
+
+fn parse_instruction(instruction: char) -> Instruction {
+    unimplemented!("Maurice faut coder maintenant ! le bouchon toussa.");
 }
 
 #[derive(Debug, PartialEq)]
@@ -40,24 +47,25 @@ pub struct Robot {
     pub id: i32,
     pub position_en_x: usize,
     pub position_en_y: usize,
-    pub instruction: String,
-    pub command: Vec<char>,
+    pub orientation: Orientation,
+    pub instruction: Vec<Instruction>,
 }
 
-// création d'autres robots
-fn autres_Robots(
-    id: i32,
-    position_en_x: usize,
-    position_en_y: usize,
-    instruction: String,
-    command: Vec<char>,
-) -> Robot {
-    Robot {
-        id: id,
-        position_en_x: position_en_x,
-        position_en_y: position_en_y,
-        instruction: instruction,
-        command: command,
+impl Robot {
+    fn new(
+        id: i32,
+        x: usize,
+        y: usize,
+        orientation: Orientation,
+        instruction: Vec<Instruction>,
+    ) -> Robot {
+        Robot {
+            id,
+            position_en_x: x,
+            position_en_y: y,
+            orientation,
+            instruction,
+        }
     }
 }
 
@@ -68,7 +76,7 @@ pub fn collisions(
     grid: &Vec<Vec<char>>,
     robot_vecteur: &Vec<Robot>,
     plateau_size: &Vec<usize>,
-) {
+) -> bool {
     for i in 0..robot_vecteur.len() {
         for j in 0..robot_vecteur.len() {
             //on vérifie d'abord que les robots ne sont pas les memes
@@ -76,7 +84,7 @@ pub fn collisions(
                 //Puis on vérifie les coordonnées en x et en y
                 && (robot_vecteur[i].position_en_x == robot_vecteur[j].position_en_x)
                 && (robot_vecteur[i].position_en_y == robot_vecteur[j].position_en_y)
-                // Check si on touche les bords 0 0 / X_MAX Y_MAX
+            // Check si on touche les bords 0 0 / X_MAX Y_MAX
             {
                 println!(
                     "Robot ID<{}> Collision en ({}, {})",
@@ -84,6 +92,7 @@ pub fn collisions(
                     robot_vecteur[i].position_en_x,
                     robot_vecteur[i].position_en_y
                 );
+                return true;
             }
         }
     }
@@ -95,8 +104,8 @@ pub fn collisions(
         println!("");
     }
     println!("===============");
+    false
 }
-
 
 /// Entry point of your rust program.
 fn main() -> std::io::Result<()> {
