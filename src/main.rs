@@ -54,9 +54,9 @@ fn autres_Robots(
 // fonction qui gère les cas de collisions avec un autre robot et affiche le plateau,
 // en indiquant les coordonnées x et y de la collision
 pub fn collisions(
-    grid: &mut Vec<Vec<char>>,
+    grid: &Vec<Vec<char>>,
     robot_vecteur: &Vec<Robot>,
-    plateau_size: &mut Vec<usize>,
+    plateau_size: &Vec<usize>,
 ) {
     for i in 0..robot_vecteur.len() {
         for j in 0..robot_vecteur.len() {
