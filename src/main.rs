@@ -91,6 +91,13 @@ pub fn collisions(
     println!("===============");
 }
 
+
+/// Entry point of your rust program.
+fn main() -> std::io::Result<()> {
+    unimplemented!("Let's code nowwww");
+    Ok(()) // don't touch this line it's like return 0 in c ;)
+}
+
 //ici se passe tout les tests
 #[cfg(test)]
 mod tests {
